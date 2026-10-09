@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 10f;
     private Rigidbody2D rb;
 
+        [Header("Attack")]
+    [SerializeField] private float damage = 1f;
+
         [Header("Ground Check")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -51,12 +54,20 @@ public class PlayerController : MonoBehaviour
     private void GetInput()
     {
         inputX = Input.GetAxisRaw("Horizontal");
-
         Move();
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             Jump();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Attack();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            animator.ResetTrigger("Attack");
         }
 
         UpdatePlayerSprite(inputX);
@@ -79,6 +90,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
     private void UpdatePlayerSprite(float inputX)
     {
         if (inputX != 0)
@@ -95,6 +111,11 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("isRunning", false);
         }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<Health>()?.ChangeHealth(-damage);
     }
     // ** SUB FUNCTIONS
 
