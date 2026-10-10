@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BattleScene.unity
     guid: 551906063e884f4419a8c27fbc742524
+  - enabled: 1
+    path: Assets/Scenes/NodeSelection.unity
+    guid: 039369ff00464494d860accea8da10bc
   m_configObjects: {}

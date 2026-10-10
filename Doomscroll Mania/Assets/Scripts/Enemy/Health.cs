@@ -24,6 +24,8 @@ public class Health : MonoBehaviour
         {
             gameObject.SetActive(false);
 
+            GameSceneManager.Instance.LoadScene("NodeSelection");
+
             //OnEnemyDeath?.Invoke(); // for transitioning back to node progression scene ?
             //GameSceneManager.Instance.LoadScene("NodeProgressionScene"); // or this, for now :D 
         }
